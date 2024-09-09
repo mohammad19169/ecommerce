@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smit_task/screens/register.dart';
 import 'package:smit_task/screens/welcome.dart';
 import 'package:smit_task/utils/AppColors.dart';
 import 'package:smit_task/screens/login.dart';
@@ -95,7 +96,7 @@ class Onboardings extends StatefulWidget {
 class _OnboardingsState extends State<Onboardings> {
   continueMethod() {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Welcome()));
+        context, MaterialPageRoute(builder: (context) => Register()));
   }
 
   int pageindex = 0;

@@ -7,4 +7,5 @@ class AppColor{
   static Color textGray=Color(0xff212121);
   static Color buttonBlue=Color(0xff42A5F5);
   static Color transparent=Color(0xff00FFFFFF);
+  static Color offwhite=Color(0xffFAF9F6);
 }

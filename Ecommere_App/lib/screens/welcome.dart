@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smit_task/screens/login.dart';
+import 'package:smit_task/screens/onboarding.dart';
 import 'package:smit_task/screens/register.dart';
 import 'package:smit_task/utils/AppColors.dart';
 import 'package:smit_task/widgets/Text.dart';
@@ -10,9 +11,9 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffC4A484),
+      backgroundColor: Color(0xffFAF9F6),
       body: Padding(
-        padding: const EdgeInsets.only(top: 40.0),
+        padding: const EdgeInsets.only(top: 80.0),
         child: Column(
           children: [
             Row(
@@ -25,7 +26,7 @@ class Welcome extends StatelessWidget {
                       height: 300,
                       width: 150,
                       child: Image.asset(
-                        'assets/images/shopimage1_1.png',
+                        'assets/images/shopimage111.jpg',
                         fit: BoxFit.cover,
                         // height: MediaQuery.of(context).size.height * 0.5,
                         // width: MediaQuery.of(context).size.width * 0.4,
@@ -54,7 +55,7 @@ class Welcome extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 20,
+              height: 40,
             ),
             RichText(
               text: TextSpan(
@@ -81,7 +82,7 @@ class Welcome extends StatelessWidget {
                   ]),
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 25.0, right: 8),
@@ -90,11 +91,11 @@ class Welcome extends StatelessWidget {
                       '   Discover the latest trends and\nshop your favorite styles with ease!'),
             ),
             SizedBox(
-              height: 20,
+              height: 30,
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Register()));
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Onboardings()));
               },
               child: Text("Let's Get Started",style: TextStyle(
                 color: Colors.white70
