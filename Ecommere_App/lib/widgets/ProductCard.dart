@@ -6,12 +6,14 @@ class ProductCard extends StatelessWidget {
   final bool isFavorited;
   final VoidCallback onFavoriteToggle;
   final VoidCallback onTap;
+  final VoidCallback onAddToCart;
 
   ProductCard({
     required this.product,
     required this.isFavorited,
     required this.onFavoriteToggle,
     required this.onTap,
+    required this.onAddToCart
   });
 
   @override

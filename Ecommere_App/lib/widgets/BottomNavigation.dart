@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:smit_task/screens/AddToCart.dart';
+import 'package:smit_task/screens/ChatClass.dart';
+import 'package:smit_task/screens/ProfileClass.dart';
 import 'package:smit_task/screens/WishlistScreen.dart';
 import 'package:smit_task/screens/register.dart';
 import 'package:smit_task/utils/AppColors.dart';
@@ -28,16 +31,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
         wishlist: _wishlist,
         onWishlistUpdated: _updateWishlist, // Callback to update wishlist
       ),
-      homepage(
-        wishlist: _wishlist,
-        onWishlistUpdated: _updateWishlist, // Callback to update wishlist
-      ),
+     AddToCartPage(),
       WishlistScreen(wishlistItems: _wishlist.toList()), // Placeholder; Will update dynamically
-      Register(),
-      homepage(
-        wishlist: _wishlist,
-        onWishlistUpdated: _updateWishlist, // Callback to update wishlist
-      ),
+      ChatClass(),
+      ProfileClass(),
     ];
   }
 

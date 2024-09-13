@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smit_task/screens/AddToCart.dart';
+import 'package:smit_task/screens/ProfileClass.dart';
 import 'package:smit_task/widgets/ProductCard.dart';
 import 'package:smit_task/widgets/ProductModel.dart';
 import 'package:smit_task/widgets/Productdetailpage.dart';
@@ -16,7 +18,12 @@ class homepage extends StatefulWidget {
 class _HomepageState extends State<homepage> {
   TextEditingController searchController = TextEditingController();
   String searchQuery = '';
-
+  List<Product> cartItems = [];
+  void addToCart(Product product) {
+    setState(() {
+      cartItems.add(product);
+    });
+  }
 
   final Set<Product> wishlist = Set<Product>();
 
@@ -92,7 +99,7 @@ class _HomepageState extends State<homepage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => WishlistScreen(
-                    wishlistItems: wishlist.toList(), // Convert Set to List
+                    wishlistItems: wishlist.toList(),
                   ),
                 ),
               );
@@ -100,7 +107,7 @@ class _HomepageState extends State<homepage> {
             icon: Icon(Icons.favorite),
           ),
           IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.person_2_rounded)),
+          IconButton(onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileClass()));}, icon: Icon(Icons.person_2_rounded)),
         ],
       ),
       body: SafeArea(
@@ -127,7 +134,6 @@ class _HomepageState extends State<homepage> {
                 SizedBox(width: 10),
                 IconButton(
                   onPressed: () {
-                    // Add sorting action here
                   },
                   icon: Icon(Icons.sort_rounded),
                   color: Colors.brown,
@@ -169,6 +175,7 @@ class _HomepageState extends State<homepage> {
                 itemBuilder: (context, index) {
                   final product = products[index];
                   return ProductCard(
+                    onAddToCart: () => addToCart(product),
                     product: product,
                     isFavorited: wishlist.contains(product),
                     onFavoriteToggle: () => toggleWishlist(product),
