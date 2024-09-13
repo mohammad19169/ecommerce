@@ -20,14 +20,53 @@ class ProductCard extends StatelessWidget {
       onTap: onTap,
       child: Card(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            IconButton(
-              icon: Icon(
-                isFavorited ? Icons.favorite : Icons.favorite_border,
-                color: isFavorited ? Colors.yellow : Colors.grey,
+            Expanded(
+              child: Image.network(
+                product.images.isNotEmpty ? product.images[0] : '',
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(Icons.broken_image);
+                },
               ),
-              onPressed: onFavoriteToggle,
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(product.name,style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Suse'
+                  ),),
+                  SizedBox(height: 4.0),
+                  Text("\$${product.price.toStringAsFixed(2)},",style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15
+                  ),),
+                  SizedBox(height: 4.0),
+                  Row(
+                    children: [
+                      Text("Rating: ${product.rating}",style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Inter'
+                      ),),
+                      IconButton(
+                        icon: Icon(
+                          isFavorited ? Icons.favorite : Icons.favorite_rounded,
+                          color: isFavorited ? Colors.yellow : Colors.yellow,
+
+                        ),
+                        onPressed: onFavoriteToggle,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
           ],
         ),
       ),

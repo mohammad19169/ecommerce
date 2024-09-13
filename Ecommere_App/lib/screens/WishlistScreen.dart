@@ -27,12 +27,12 @@ class WishlistScreen extends StatelessWidget {
           final product = wishlistItems[index];
           return ProductCard(
             product: product,
-            isFavorited: true, // Since these are wishlist items
+            isFavorited: true,
             onFavoriteToggle: () {
-              // Optionally implement a way to remove the item from the wishlist
+
             },
             onTap: () {
-              // Navigate to product detail page if needed
+
             },
           );
         },

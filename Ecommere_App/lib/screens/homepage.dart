@@ -103,90 +103,92 @@ class _HomepageState extends State<homepage> {
           IconButton(onPressed: () {}, icon: Icon(Icons.person_2_rounded)),
         ],
       ),
-      body: Column(children: [
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    labelText: 'Search',
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(),
+      body: SafeArea(
+        child: Column(children: [
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: searchController,
+                    decoration: InputDecoration(
+                      labelText: 'Search',
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        searchQuery = value;
+                      });
+                    },
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      searchQuery = value;
-                    });
-                  },
                 ),
-              ),
-              SizedBox(width: 10),
-              IconButton(
-                onPressed: () {
-                  // Add sorting action here
-                },
-                icon: Icon(Icons.sort_rounded),
-                color: Colors.brown,
-              ),
-            ],
-          ),
-        ),
-        SizedBox(height: 20),
-        Padding(
-          padding: const EdgeInsets.only(right: 20.0, left: 20, top: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Category',
-                style: TextStyle(fontSize: 25),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'See All',
-                  style: TextStyle(fontSize: 15),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: GridView.builder(
-              itemCount: products.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 2 / 3,
-              ),
-              itemBuilder: (context, index) {
-                final product = products[index];
-                return ProductCard(
-                  product: product,
-                  isFavorited: wishlist.contains(product),
-                  onFavoriteToggle: () => toggleWishlist(product),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Productdetailpage(
-                          product: product,
-                        ),
-                      ),
-                    );
+                SizedBox(width: 10),
+                IconButton(
+                  onPressed: () {
+                    // Add sorting action here
                   },
-                );
-              },
+                  icon: Icon(Icons.sort_rounded),
+                  color: Colors.brown,
+                ),
+              ],
             ),
           ),
-        ),
-      ]),
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0, left: 20, top: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Category',
+                  style: TextStyle(fontSize: 25),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'See All',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: GridView.builder(
+                itemCount: products.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 2 / 2.75,
+                ),
+                itemBuilder: (context, index) {
+                  final product = products[index];
+                  return ProductCard(
+                    product: product,
+                    isFavorited: wishlist.contains(product),
+                    onFavoriteToggle: () => toggleWishlist(product),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Productdetailpage(
+                            product: product,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+        ]),
+      ),
     );
   }
 }
