@@ -1,43 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:smit_task/widgets/Text.dart';
+import 'package:smit_task/widgets/ProductModel.dart';
 
 class ProductCard extends StatelessWidget {
+  final Product product;
+  final bool isFavorited;
+  final VoidCallback onFavoriteToggle;
+  final VoidCallback onTap;
 
-  const ProductCard({super.key,required this.imageurl,required this.name,required this.price});
-  final String imageurl;
-  final String name;
-  final String price;
+  ProductCard({
+    required this.product,
+    required this.isFavorited,
+    required this.onFavoriteToggle,
+    required this.onTap,
+  });
+
   @override
   Widget build(BuildContext context) {
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-
-      Container(
-        height: MediaQuery.of(context).size.height*0.18,
-        width: MediaQuery.of(context).size.width*0.4,
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.network(imageurl)),
-      ),
-      Container(
-        height: 45,
-        width: MediaQuery.of(context).size.width*0.4,
-        child: Padding(
-          padding: const EdgeInsets.only(left:15.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(name,style: TextStyle(fontSize: 15,fontFamily: 'Inter'),),
-              SizedBox(width: 15,),
-              Text(price,style: TextStyle(fontSize: 15,fontFamily: 'Inter'),),
-            ],
-          ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        child: Column(
+          children: [
+            IconButton(
+              icon: Icon(
+                isFavorited ? Icons.favorite : Icons.favorite_border,
+                color: isFavorited ? Colors.yellow : Colors.grey,
+              ),
+              onPressed: onFavoriteToggle,
+            ),
+          ],
         ),
       ),
-
-    ],
-        );
+    );
   }
 }

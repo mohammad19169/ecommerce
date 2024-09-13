@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smit_task/screens/homepage.dart';
 import 'package:smit_task/utils/AppColors.dart';
 import 'package:smit_task/screens/register.dart';
+import 'package:smit_task/widgets/BottomNavigation.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -24,7 +25,7 @@ class _LoginState extends State<Login> {
       if (_email == correctEmail && _password == correctPassword) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => homepage()),
+          MaterialPageRoute(builder: (context) => BottomNavigation()),
         );
       } else {
         showDialog(
