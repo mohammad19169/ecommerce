@@ -20,34 +20,31 @@ class _LoginState extends State<Login> {
   final String correctEmail = 'umer@1234';
   final String correctPassword = '1234';
 
-  void _login() {
-    if (_formKey.currentState!.validate()) {
-      if (_email == correctEmail && _password == correctPassword) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => BottomNavigation()),
-        );
-      } else {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Invalid Credentials'),
-              content: Text('The email or password you entered is incorrect.'),
-              actions: [
-                TextButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-    }
-  }
+  // void _login() {
+  //   if (_formKey.currentState!.validate()) {
+  //     if (_email == correctEmail && _password == correctPassword) {
+  //       Navigator.pushReplacement(
+  //         context,
+  //         MaterialPageRoute(builder: (context) => BottomNavigation()),
+      //   );
+      // } else {
+      //   showDialog(
+      //     context: context,
+      //     builder: (BuildContext context) {
+      //       return AlertDialog(
+      //         title: Text('Invalid Credentials'),
+      //         content: Text('The email or password you entered is incorrect.'),
+      //         actions: [
+      //           TextButton(
+      //             child: Text('OK'),
+      //             onPressed: () {
+      //               Navigator.of(context).pop();
+      //             },
+      //           ),
+      //         ],
+      //       );
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +82,10 @@ class _LoginState extends State<Login> {
                 child: Column(
                   children: [
                     TextFormField(
-                      controller: emailController,
-                      onChanged: (value) {
-                        _email = value;
-                      },
+                      //controller: emailController,
+                      // onChanged: (value) {
+                      //   _email = value;
+                      // },
                       decoration: InputDecoration(
                           hintText: 'Email',
                           hintStyle: TextStyle(fontFamily: 'Inter'),
@@ -105,10 +102,10 @@ class _LoginState extends State<Login> {
                       height: 25,
                     ),
                     TextFormField(
-                      controller: passwordController,
-                      onChanged: (value) {
-                        _password = value;
-                      },
+                      // controller: passwordController,
+                      // onChanged: (value) {
+                      //   _password = value;
+                      // },
                       obscureText: true,
                       decoration: InputDecoration(
                         hintText: 'Password',
@@ -144,7 +141,12 @@ class _LoginState extends State<Login> {
                     backgroundColor: AppColor.buttonBlue,
                     child: IconButton(
                         icon: Icon(Icons.arrow_forward),
-                        onPressed: _login),
+                        onPressed: (){
+                          Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => BottomNavigation()),
+                                );
+                        }),
                   )
                 ],
               ),
