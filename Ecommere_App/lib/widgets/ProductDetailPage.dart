@@ -18,7 +18,6 @@ class Productdetailpage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Use ImageCarousel to display the product images
             ImageCarousel(images: product.images),
             Padding(
               padding: EdgeInsets.all(16),

@@ -6,7 +6,7 @@ class ProfileClass extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.brown,
-        title: Text('Profile'),
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -64,7 +64,6 @@ class ProfileClass extends StatelessWidget {
             ),
             SizedBox(height: 16),
 
-            // Settings or more info card
             Card(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               elevation: 4,

@@ -6,7 +6,7 @@ import 'package:smit_task/screens/WishlistScreen.dart';
 import 'package:smit_task/screens/register.dart';
 import 'package:smit_task/utils/AppColors.dart';
 import 'package:smit_task/screens/homepage.dart';
-import 'package:smit_task/widgets/ProductModel.dart'; // Import Product class
+import 'package:smit_task/widgets/ProductModel.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -20,7 +20,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   final Set<Product> _wishlist = Set<Product>();
 
-  // Initialize _pages with placeholder pages
   late List<Widget> _pages;
 
   @override
@@ -32,7 +31,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         onWishlistUpdated: _updateWishlist, // Callback to update wishlist
       ),
      AddToCartPage(),
-      WishlistScreen(wishlistItems: _wishlist.toList()), // Placeholder; Will update dynamically
+      WishlistScreen(wishlistItems: _wishlist.toList()),
       ChatClass(),
       ProfileClass(),
     ];
@@ -40,7 +39,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   void _updateWishlist() {
     setState(() {
-      // Update the WishlistScreen with current wishlist
       _pages[2] = WishlistScreen(wishlistItems: _wishlist.toList());
     });
   }

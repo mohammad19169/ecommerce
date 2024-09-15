@@ -1,6 +1,27 @@
 import 'package:flutter/material.dart';
 
-class ChatClass extends StatelessWidget {
+class ChatClass extends StatefulWidget {
+  @override
+  _ChatClassState createState() => _ChatClassState();
+}
+
+class _ChatClassState extends State<ChatClass> {
+  TextEditingController _messageController = TextEditingController();
+  List<Map<String, dynamic>> _messages = [];
+
+  void _sendMessage() {
+    if (_messageController.text.isNotEmpty) {
+      setState(() {
+        _messages.add({
+          'text': _messageController.text,
+          'time': '08:04 pm',
+          'isMe': true,
+        });
+      });
+      _messageController.clear();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,13 +36,13 @@ class ChatClass extends StatelessWidget {
         title: Row(
           children: [
             CircleAvatar(
-              backgroundImage: NetworkImage('https://img.freepik.com/free-photo/young-people-eating-berries-street_23-2150163636.jpg'), // Replace with actual image URL
+              backgroundImage: NetworkImage('https://img.freepik.com/free-photo/young-people-eating-berries-street_23-2150163636.jpg'),
             ),
             SizedBox(width: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('James Anderson', style: TextStyle(fontSize: 16,color: Colors.white70)),
+                Text('Ayesha Haider', style: TextStyle(fontSize: 16, color: Colors.white70)),
                 Text('Online', style: TextStyle(fontSize: 12, color: Colors.white70)),
               ],
             ),
@@ -37,170 +58,63 @@ class ChatClass extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView(
+            child: ListView.builder(
               padding: EdgeInsets.all(16),
-              children: [
-                Center(
-                  child: Text('TODAY', style: TextStyle(color: Colors.grey)),
-                ),
-                SizedBox(height: 16),
-
-                // Sender text message
-                Row(
+              itemCount: _messages.length,
+              itemBuilder: (context, index) {
+                final message = _messages[index];
+                return Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: message['isMe'] ? MainAxisAlignment.end : MainAxisAlignment.start,
                   children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage('https://img.freepik.com/free-photo/young-people-eating-berries-street_23-2150163636.jpg'), // Replace with actual image URL
-                    ),
+                    if (!message['isMe'])
+                      CircleAvatar(
+                        backgroundImage: NetworkImage('https://img.freepik.com/free-photo/young-people-eating-berries-street_23-2150163636.jpg'),
+                      ),
                     SizedBox(width: 8),
                     Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('James Anderson', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                          Container(
-                            margin: EdgeInsets.only(top: 4),
-                            padding: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Text(
-                              'Hello, there',
-                              style: TextStyle(fontSize: 14),
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text('08:04 pm', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16),
-
-                // Receiver text message
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: message['isMe'] ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                         children: [
                           Container(
                             margin: EdgeInsets.only(top: 4),
                             padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: Colors.brown,
+                              color: message['isMe'] ? Colors.brown : Colors.grey[200],
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
-                              'Hi, How are you? How can I help you today',
-                              style: TextStyle(fontSize: 14, color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text('08:04 pm', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: 8),
-                    CircleAvatar(
-                      backgroundImage: NetworkImage('https://img.freepik.com/free-photo/portrait-expressive-young-man-wearing-formal-suit_273609-6942.jpg'), // Replace with actual image URL
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16),
-
-                // Sender image message
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage('https://img.freepik.com/free-photo/young-people-eating-berries-street_23-2150163636.jpg'), // Replace with actual image URL
-                    ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Angie Brekke', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                          SizedBox(height: 8),
-                          Container(
-                            width: 200,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              image: DecorationImage(
-                                image: AssetImage('assets/images/chatimage.png'), // Replace with actual image URL
-                                fit: BoxFit.cover,
+                              message['text'],
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: message['isMe'] ? Colors.white : Colors.black,
                               ),
                             ),
                           ),
                           SizedBox(height: 4),
-                          Text('08:04 pm', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16),
-
-                // Receiver voice message
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 4),
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Colors.brown,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(Icons.play_arrow, color: Colors.white),
-                                SizedBox(width: 8),
-                                Expanded(
-                                  child: LinearProgressIndicator(
-                                    value: 0.5,
-                                    backgroundColor: Colors.white24,
-                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                  ),
-                                ),
-                                SizedBox(width: 8),
-                                Text('0:13', style: TextStyle(color: Colors.white)),
-                              ],
-                            ),
+                          Text(
+                            message['time'],
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
                           ),
-                          SizedBox(height: 4),
-                          Text('08:04 pm', style: TextStyle(fontSize: 12, color: Colors.grey)),
                         ],
                       ),
                     ),
-                    SizedBox(width: 8),
-                    CircleAvatar(
-                      backgroundImage: NetworkImage('https://img.freepik.com/free-photo/portrait-expressive-young-man-wearing-formal-suit_273609-6942.jpg'), // Replace with actual image URL
-                    ),
+                    if (message['isMe'])
+                      CircleAvatar(
+                        backgroundImage: NetworkImage('https://img.freepik.com/free-photo/portrait-expressive-young-man-wearing-formal-suit_273609-6942.jpg'),
+                      ),
                   ],
-                ),
-              ],
+                );
+              },
             ),
           ),
-
-          // Message input field
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Expanded(
                   child: TextField(
+                    controller: _messageController,
                     decoration: InputDecoration(
                       hintText: 'Type a message here...',
                       border: OutlineInputBorder(
@@ -216,7 +130,7 @@ class ChatClass extends StatelessWidget {
                   backgroundColor: Colors.brown,
                   child: IconButton(
                     icon: Icon(Icons.send, color: Colors.white),
-                    onPressed: () {},
+                    onPressed: _sendMessage,
                   ),
                 ),
               ],

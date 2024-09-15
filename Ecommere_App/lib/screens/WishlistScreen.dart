@@ -23,7 +23,10 @@ class _WishlistScreenState extends State<WishlistScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child:  Text('My Wishlist')),
+        backgroundColor: Colors.brown,
+        title: Center(child:  Text('My Wishlist',style: TextStyle(
+          color: Colors.white
+        ),)),
       ),
       body: widget.wishlistItems.isEmpty
           ? Center(child: Text('No items in your wishlist'))
